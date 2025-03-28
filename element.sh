@@ -32,15 +32,15 @@ echo "$RESULT" | while IFS="|" read -r atomic_number symbol name
       atomic_number=$(echo "$atomic_number" | sed 's/^ *//;s/ *$//')
       symbol=$(echo "$symbol" | sed 's/^ *//;s/ *$//')
       name=$(echo "$name" | sed 's/^ *//;s/ *$//')
-      DATA=$($PSQL "select type, atomic_mass, melting_point_celsius, boiling_point_celsius from properties where atomic_number = $atomic_number;")
+      DATA=$($PSQL "select types, atomic_mass, melting_point_celsius, boiling_point_celsius from properties where atomic_number = $atomic_number;")
       
-echo "$DATA" | while IFS="|" read -r type atomic_mass melting_point_celsius boiling_point_celsius
+echo "$DATA" | while IFS="|" read -r types atomic_mass melting_point_celsius boiling_point_celsius
 do
-type=$(echo "$type" | sed 's/^ *//;s/ *$//')
+types=$(echo "$types" | sed 's/^ *//;s/ *$//')
           atomic_mass=$(echo "$atomic_mass" | sed 's/^ *//;s/ *$//')
           melting_point_celsius=$(echo "$melting_point_celsius" | sed 's/^ *//;s/ *$//')
           boiling_point_celsius=$(echo "$boiling_point_celsius" | sed 's/^ *//;s/ *$//')
-        echo "The element with atomic number $atomic_number is $name ($symbol). It's a $type, with a mass of $atomic_mass amu. $name has a melting point of $melting_point_celsius celsius and a boiling point of $boiling_point_celsius celsius."
+        echo "The element with atomic number $atomic_number is $name ($symbol). It's a $types, with a mass of $atomic_mass amu. $name has a melting point of $melting_point_celsius celsius and a boiling point of $boiling_point_celsius celsius."
       done
       done
 fi
@@ -60,15 +60,15 @@ echo "$RESULT" | while IFS="|" read -r atomic_number symbol name
       name=$(echo "$name" | sed 's/^ *//;s/ *$//')
      # DATA=$($PSQL "select type, weight, melting_point, boiling_point from properties where atomic_number = $atomic_number;")
       
-DATA=$($PSQL "select type, atomic_mass, melting_point_celsius, boiling_point_celsius from properties where atomic_number = $atomic_number;")
+DATA=$($PSQL "select types, atomic_mass, melting_point_celsius, boiling_point_celsius from properties where atomic_number = $atomic_number;")
       
-echo "$DATA" | while IFS="|" read -r type atomic_mass melting_point_celsius boiling_point_celsius
+echo "$DATA" | while IFS="|" read -r types atomic_mass melting_point_celsius boiling_point_celsius
 do
-type=$(echo "$type" | sed 's/^ *//;s/ *$//')
+types=$(echo "$types" | sed 's/^ *//;s/ *$//')
           atomic_mass=$(echo "$atomic_mass" | sed 's/^ *//;s/ *$//')
           melting_point_celsius=$(echo "$melting_point_celsius" | sed 's/^ *//;s/ *$//')
           boiling_point_celsius=$(echo "$boiling_point_celsius" | sed 's/^ *//;s/ *$//')
-        echo "The element with atomic number $atomic_number is $name ($symbol). It's a $type, with a mass of $atomic_mass amu. $name has a melting point of $melting_point_celsius celsius and a boiling point of $boiling_point_celsius celsius."
+        echo "The element with atomic number $atomic_number is $name ($symbol). It's a $types, with a mass of $atomic_mass amu. $name has a melting point of $melting_point_celsius celsius and a boiling point of $boiling_point_celsius celsius."
       done
       done
 
